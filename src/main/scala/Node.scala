@@ -5,7 +5,7 @@ class Node(var item: String, var next: Node) {
 }
 
 class LinkedList {
-  var head: Node = null
+  var head: Node = _
 
   def addToStart(s: String): Unit = {
     head = new Node(s, head)
@@ -96,11 +96,11 @@ class LinkedList {
 
   def findElementPosition(s: String): Int = {
     if (isPresent(s)) {
-      var i: Int = 0
+      val i: Int = 0
 
       def present(n: Node, i: Int, s: String): Int = {
         if (n != null) {
-          if (n.item == s) return i + 1
+          if (n.item == s) i + 1
           else {
             if (n.next != null) present(n.next, i + 1, s) else i
           }
@@ -108,7 +108,7 @@ class LinkedList {
       }
 
       present(head, i, s)
-    } else return -1
+    } else -1
   }
 
   def swapElements(e1: String, e2: String): Unit = {
@@ -151,7 +151,7 @@ class LinkedList {
 
   def insertAfter(before: String, after: String): Unit = {
     if (findElement(before) != null) {
-      var newNode: Node = new Node(after, findElement(before).next)
+      val newNode: Node = new Node(after, findElement(before).next)
       findElement(before).next = newNode
     }
   }
@@ -174,16 +174,16 @@ object LinkedList extends App {
   flightList.addToStart("Stockholm")
   println(flightList)
 
-  var etape: String = "Shangai"
-  println(s"Position de ${etape}: ${flightList.findElementPosition(etape)}")
+  var etape: String = "Shanghai"
+  println(s"Position de $etape: ${flightList.findElementPosition(etape)}")
   println(flightList)
 
   etape = "Osaka"
-  println(s"Position de ${etape}: ${flightList.findElementPosition(etape)}")
+  println(s"Position de $etape: ${flightList.findElementPosition(etape)}")
   println(flightList)
 
   etape = "Paris"
-  println(s"Position de ${etape}: ${flightList.findElementPosition(etape)}")
+  println(s"Position de $etape: ${flightList.findElementPosition(etape)}")
   println(flightList)
 
   flightList.removeFirstElement()
@@ -203,7 +203,7 @@ object LinkedList extends App {
   println(flightList)
   flightList.swapElements(etape, "Tokyo")
   println(flightList)
-  flightList.insertAfter("Paris", "Shangai")
+  flightList.insertAfter("Paris", "Shanghai")
   println(flightList)
   flightList.removeElement("Osaka")
   println(flightList)
