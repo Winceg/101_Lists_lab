@@ -94,21 +94,40 @@ class LinkedList {
     present(head)
   }
 
+  def findElementPosition(s: String): Int = {
+    if (isPresent(s)) {
+      var i: Int = 0
+
+      def present(n: Node, i: Int, s: String): Int = {
+        if (n != null) {
+          if (n.item == s) return i + 1
+          else {
+            if (n.next != null) present(n.next, i + 1, s) else i
+          }
+        } else i
+      }
+
+      present(head, i, s)
+    } else return -1
+  }
+
   def swapElements(e1: String, e2: String): Unit = {
     if (isPresent(e1) && isPresent(e2)) {
-      var temp: String = e1
-      println(s"e1: $e1 - e2: $e2 - elem1: ${findElement(e1).item} - elem2: ${findElement(e2).item}")
-      findElement(e2).item = e1
-      findElement(e1).item = e2
-      println(s"e1: $e1 - e2: $e2 - elem1: ${findElement(e1).item} - elem2: ${findElement(e2).item}")
-      println("...............")
+      println(s"Swapping $e1 and $e2")
+      if(findElementPosition(e1) < findElementPosition(e2)) {
+        findElement(e2).item = e1
+        findElement(e1).item = e2
+      }else{
+        findElement(e1).item = e2
+        findElement(e2).item = e1
+      }
     } else {
       println("Une ou les deux escales n'existent pas sur l'itinéraire.")
     }
   }
 
   def removeLastElement(): Unit = {
-    if(getLastElement() != null) {
+    if (getLastElement() != null) {
       removeElement(getLastElement().item)
     }
   }
@@ -155,6 +174,18 @@ object LinkedList extends App {
   flightList.addToStart("Stockholm")
   println(flightList)
 
+  var etape: String = "Shangai"
+  println(s"Position de ${etape}: ${flightList.findElementPosition(etape)}")
+  println(flightList)
+
+  etape = "Osaka"
+  println(s"Position de ${etape}: ${flightList.findElementPosition(etape)}")
+  println(flightList)
+
+  etape = "Paris"
+  println(s"Position de ${etape}: ${flightList.findElementPosition(etape)}")
+  println(flightList)
+
   flightList.removeFirstElement()
   println(flightList)
 
@@ -163,7 +194,7 @@ object LinkedList extends App {
 
   flightList.addToEnd("Genève")
   println(flightList)
-  var etape: String = "Sion"
+  etape = "Sion"
   println(s"Est-ce que $etape est dans l'itinéraire ? ${flightList.isPresent(etape)}")
   etape = "Rome"
   println(s"Est-ce que $etape est dans l'itinéraire ? ${flightList.isPresent(etape)}")
@@ -181,6 +212,8 @@ object LinkedList extends App {
 
   flightList.removeLastElement()
   println(flightList)
+
+
 
   println("...........................")
   var n = new LinkedList()
