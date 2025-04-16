@@ -197,7 +197,7 @@ object LinkedList extends App {
   etape = "Sion"
   println(s"Est-ce que $etape est dans l'itinéraire ? ${flightList.isPresent(etape)}")
   etape = "Rome"
-  println(s"Est-ce que $etape est dans l'itinéraire ? ${flightList.isPresent(etape)} ")
+  println(s"Est-ce que $etape est dans l'itinéraire ? ${flightList.isPresent(etape)}")
   println(flightList.findElement(etape))
 
   println(flightList)
